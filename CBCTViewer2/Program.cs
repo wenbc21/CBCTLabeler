@@ -12,7 +12,7 @@ namespace CBCTLabeler
         [STAThread]
         static void Main()
         {
-            var timer = GetTimer();
+            var timer = GetTimer(5000);
             timer.Start();
             
             Application.EnableVisualStyles();
@@ -20,10 +20,10 @@ namespace CBCTLabeler
             Application.Run(new Form1());
         }
 
-        private static System.Timers.Timer GetTimer()
+        private static System.Timers.Timer GetTimer(int inter)
         {
             var aTimer = new System.Timers.Timer(); //初始化定时器
-            aTimer.Interval = 5000; // ms
+            aTimer.Interval = inter; // ms
             aTimer.Elapsed += OnTimedEvent;
             aTimer.AutoReset = true; // repeat trigger
             return aTimer;
