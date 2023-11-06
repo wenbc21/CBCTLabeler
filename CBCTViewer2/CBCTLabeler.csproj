@@ -111,9 +111,8 @@
     <None Include="background.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="SimpleITKCSharpNative.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="SimpleITKCSharpManaged.dll" />
+    <Content Include="SimpleITKCSharpNative.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
