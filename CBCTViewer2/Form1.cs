@@ -16,7 +16,7 @@ namespace CBCTLabeler
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-
+            // 测试测试123123
         }
 
         private void OpenFile_Click(object sender, EventArgs e)
