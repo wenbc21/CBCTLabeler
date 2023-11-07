@@ -53,8 +53,11 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MaterialSkin">
+      <HintPath>MaterialSkin.dll</HintPath>
+    </Reference>
     <Reference Include="SimpleITKCSharpManaged">
-      <HintPath>.\SimpleITKCSharpManaged.dll</HintPath>
+      <HintPath>SimpleITKCSharpManaged.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -111,6 +114,8 @@
     <None Include="background.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MaterialSkin.dll" />
+    <Content Include="ReadMe.md" />
     <Content Include="SimpleITKCSharpManaged.dll" />
     <Content Include="SimpleITKCSharpNative.dll" />
   </ItemGroup>

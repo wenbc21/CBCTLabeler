@@ -1,4 +1,7 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
+using MaterialSkin.Controls;
 
 namespace CBCTLabeler
 {
@@ -32,21 +35,21 @@ namespace CBCTLabeler
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.imageLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.zoominButton = new System.Windows.Forms.Button();
-            this.zoomoutButton = new System.Windows.Forms.Button();
-            this.colorButton = new System.Windows.Forms.Button();
-            this.labelButton = new System.Windows.Forms.Button();
-            this.serieLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.lastButton = new System.Windows.Forms.Button();
-            this.trackBar = new System.Windows.Forms.TrackBar();
-            this.nextButton = new System.Windows.Forms.Button();
-            this.numbertextBox = new System.Windows.Forms.TextBox();
+            this.zoominButton = new MaterialButton();
+            this.zoomoutButton = new MaterialButton();
+            this.colorButton = new MaterialButton();
+            this.labelButton = new MaterialButton();
+            this.serieLayoutPanel = new MaterialCard();
+            this.lastButton = new MaterialButton();
+            this.trackBar = new TrackBar();
+            this.nextButton = new MaterialButton();
+            this.numbertextBox = new TextBox();
             this.numLabel = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.fileLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
-            this.OpenFile = new System.Windows.Forms.Button();
-            this.CloseFile = new System.Windows.Forms.Button();
-            this.SaveFile = new System.Windows.Forms.Button();
+            this.OpenFile = new MaterialButton();
+            this.CloseFile = new MaterialButton();
+            this.SaveFile = new MaterialButton();
             this.openfolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.savefolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
@@ -156,16 +159,21 @@ namespace CBCTLabeler
             // 
             // trackBar
             // 
-            this.trackBar.Location = new System.Drawing.Point(3, 32);
+            this.trackBar.Location = new System.Drawing.Point(3, 62);
+            
+            
             this.trackBar.Maximum = 0;
+            
             this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(104, 56);
+            this.trackBar.Size = new System.Drawing.Size(104, 10);
             this.trackBar.TabIndex = 3;
+            
             this.trackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
+            
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(3, 94);
+            this.nextButton.Location = new System.Drawing.Point(3, 124);
             this.nextButton.Name = "nextButton";
             this.nextButton.Size = new System.Drawing.Size(75, 23);
             this.nextButton.TabIndex = 1;
@@ -175,7 +183,7 @@ namespace CBCTLabeler
             // 
             // numbertextBox
             // 
-            this.numbertextBox.Location = new System.Drawing.Point(3, 123);
+            this.numbertextBox.Location = new System.Drawing.Point(3, 183);
             this.numbertextBox.Name = "numbertextBox";
             this.numbertextBox.Size = new System.Drawing.Size(75, 25);
             this.numbertextBox.TabIndex = 2;
@@ -184,7 +192,7 @@ namespace CBCTLabeler
             // numLabel
             // 
             this.numLabel.AutoSize = true;
-            this.numLabel.Location = new System.Drawing.Point(3, 151);
+            this.numLabel.Location = new System.Drawing.Point(3, 220);
             this.numLabel.Name = "numLabel";
             this.numLabel.Size = new System.Drawing.Size(95, 15);
             this.numLabel.TabIndex = 4;
@@ -271,19 +279,20 @@ namespace CBCTLabeler
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel serieLayoutPanel;
+        private MaterialCard serieLayoutPanel;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.FlowLayoutPanel fileLayoutPanel;
         private System.Windows.Forms.FlowLayoutPanel imageLayoutPanel;
-        private System.Windows.Forms.Button zoominButton;
-        private System.Windows.Forms.Button zoomoutButton;
-        private System.Windows.Forms.Button colorButton;
-        private System.Windows.Forms.Button labelButton;
-        private System.Windows.Forms.Button lastButton;
-        private System.Windows.Forms.Button nextButton;
-        private System.Windows.Forms.Button OpenFile;
-        private System.Windows.Forms.Button CloseFile;
-        private System.Windows.Forms.Button SaveFile;
+        
+        private MaterialButton zoominButton;
+        private MaterialButton zoomoutButton;
+        private MaterialButton colorButton;
+        private MaterialButton labelButton;
+        private MaterialButton lastButton;
+        private MaterialButton nextButton;
+        private MaterialButton OpenFile;
+        private MaterialButton CloseFile;
+        private MaterialButton SaveFile;
         private System.Windows.Forms.FolderBrowserDialog openfolderDialog;
         private System.Windows.Forms.FolderBrowserDialog savefolderDialog;
         private System.Windows.Forms.TextBox numbertextBox;

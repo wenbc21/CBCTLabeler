@@ -3,14 +3,21 @@ using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using MaterialSkin;
+using MaterialSkin.Controls;
 
 namespace CBCTLabeler
 {
-    public partial class Form1 : Form
+    public partial class Form1 : MaterialForm
     {
         public Form1()
         {
             InitializeComponent();
+
+            var materialSkinManager = MaterialSkinManager.Instance;
+            materialSkinManager.AddFormToManage(this);
+            materialSkinManager.Theme = MaterialSkinManager.Themes.LIGHT;
+            materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -173,12 +180,19 @@ namespace CBCTLabeler
 
         private void numbertextBox_TextChanged(object sender, EventArgs e)
         {
-            num = int.Parse(numbertextBox.Text);
-            if (num >= 0 && num < imageNumber)
+            try
             {
-                ShowImage();
+                num = int.Parse(numbertextBox.Text);
+                if (num >= 0 && num < imageNumber)
+                {
+                    ShowImage();
+                }
             }
-            
+            catch (Exception exception)
+            {
+                // Console.WriteLine(exception);
+                // throw;
+            }
         }
 
         private void pictureBox_Click(object sender, EventArgs e)
