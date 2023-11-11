@@ -1,8 +1,13 @@
 ﻿using itk.simple;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Windows.Forms;
+using Newtonsoft.Json;
+using static System.Net.Mime.MediaTypeNames;
+using System.Xml.Linq;
 
 namespace CBCTLabeler
 {
@@ -11,7 +16,6 @@ namespace CBCTLabeler
         public Form1()
         {
             InitializeComponent();
-
         }
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
@@ -23,6 +27,8 @@ namespace CBCTLabeler
         {
             if (openfolderDialog.ShowDialog() == DialogResult.OK)
             {
+                dicom_array_3d = null;
+                GC.Collect();
                 String filePath = openfolderDialog.SelectedPath;
 
                 ImageSeriesReader reader = new ImageSeriesReader();
@@ -54,58 +60,110 @@ namespace CBCTLabeler
 
                 dicom_array_3d = new int[(int)size[2], (int)size[0], (int)size[1]];
                 Buffer.BlockCopy(dicom_array, 0, dicom_array_3d, 0, length * 4);
+                dicom_array = null;
+                GC.Collect();
 
-                numLabel.Text = "of " + (size[2] - 1).ToString() + " slices";
-                imageNumber = (int)size[2] - 1;
-                trackBar.Minimum = 0;
+                numLabel.Text = "of " + ((int)size[2]).ToString() + " slices";
+                num = 1;
+                imageNumber = (int)size[2];
+                trackBar.Minimum = 1;
                 trackBar.Maximum = imageNumber;
+                numbertextBox.Text = num.ToString();
                 labeling = false;
                 labeled = false;
 
                 ShowImage();
 
             }
+            GC.Collect();
         }
 
-        private void ShowImage()
-        {
-            Bitmap bitdata = new Bitmap(512, 512); //创建原图大小的空白位图
-            for (int x = 0; x < 512; x++)
-            {
-                for (int y = 0; y < 512; y++)
-                {
-                    Color c = Color.FromArgb(dicom_array_3d[num, x, y], dicom_array_3d[num, x, y], dicom_array_3d[num, x, y]);
-                    bitdata.SetPixel(y, x, c);
-                }
-            }
-
-            System.Drawing.Image img = System.Drawing.Image.FromHbitmap(bitdata.GetHbitmap());
-            pictureBox.Image = img;
-            pictureBox.Show();
-        }
 
         private void CloseFile_Click(object sender, EventArgs e)
         {
-            if (labeled)
-            {
-                imageNumber = 0;
-                numLabel.Text = "of 0 slices";
-                trackBar.Maximum = 0;
-                pictureBox.Image = global::CBCTLabeler.Properties.Resources.background;
-            }
+            dicom_array_3d = null;
+            num = 0;
+            imageNumber = 0;
+            numLabel.Text = "of 0 slices";
+            trackBar.Minimum = 0;
+            trackBar.Maximum = 0;
+            pictureBox.Image = null;
+            numbertextBox.Text = null;
+            labeled = false;
+            GC.Collect();
         }
 
         private void SaveFile_Click(object sender, EventArgs e)
         {
-            if (savefolderDialog.ShowDialog() == DialogResult.OK)
+            if (saveFileDialog.ShowDialog() == DialogResult.OK && labeled)
             {
-                String filePath = savefolderDialog.SelectedPath;
+                String filePath = saveFileDialog.FileName;
 
-                Console.WriteLine("Writing image: " + filePath);
-                ImageFileWriter writer = new ImageFileWriter();
-                writer.SetFileName(filePath);
-                // writer.Execute(image);
+                int labeledx = num - 1;
+                if (labeledx < 48)
+                {
+                    labeledx = 48;
+                }
+                if (labeledx > imageNumber - 49)
+                {
+                    labeledx = imageNumber - 49;
+                }
+
+                Dictionary<string, int> dict = new Dictionary<string, int>();
+                dict.Add("midx", labeledx);
+                dict.Add("midy", labelPositionX);
+                dict.Add("midz", labelPositionY);
+                string jsonOutput = JsonConvert.SerializeObject(dict);
+                System.IO.File.WriteAllText(filePath, jsonOutput);
             }
+        }
+
+        private void ShowImage()
+        {
+            Bitmap bitdata = new Bitmap(512, 512);
+            for (int x = 0; x < 512; x++)
+            {
+                for (int y = 0; y < 512; y++)
+                {
+                    Color c = Color.FromArgb(dicom_array_3d[num - 1, x, y], 
+                        dicom_array_3d[num - 1, x, y], 
+                        dicom_array_3d[num - 1, x, y]);
+                    bitdata.SetPixel(y, x, c);
+                }
+            }
+
+            pictureBox.Image = System.Drawing.Image.FromHbitmap(bitdata.GetHbitmap());
+            pictureBox.Show();
+        }
+
+        private void ShowLabeledImage()
+        {
+            Bitmap bitdata = new Bitmap(512, 512);
+            for (int x = 0; x < 512; x++)
+            {
+                for (int y = 0; y < 512; y++)
+                {
+                    Color c = Color.FromArgb(dicom_array_3d[num - 1, x, y], 
+                        dicom_array_3d[num - 1, x, y], 
+                        dicom_array_3d[num - 1, x, y]);
+                    bitdata.SetPixel(y, x, c);
+                }
+            }
+
+            for (int x = labelPositionX - 48; x < labelPositionX + 48; x++)
+            {
+                for (int y = labelPositionY - 48; y < labelPositionY + 48; y++)
+                {
+                    Color pixel = bitdata.GetPixel(x, y);
+                    Color c = Color.FromArgb((pixel.R * 2 + labelColor.R) / 3,
+                        (pixel.G * 2 + labelColor.G) / 3, 
+                        (pixel.B * 2 + labelColor.B) / 3);
+                    bitdata.SetPixel(x, y, c);
+                }
+            }
+
+            pictureBox.Image = System.Drawing.Image.FromHbitmap(bitdata.GetHbitmap());
+            pictureBox.Show();
         }
 
         private void zoominButton_Click(object sender, EventArgs e)
@@ -128,26 +186,37 @@ namespace CBCTLabeler
 
         private void labelButton_Click(object sender, EventArgs e)
         {
-
+            if (dicom_array_3d == null)
+            {
+                return;
+            }
+            labeling = true;
+            Cursor = Cursors.Cross;
         }
 
         private void lastButton_Click(object sender, EventArgs e)
         {
-            if(num < imageNumber && num > 0)
+            if (dicom_array_3d == null)
+            {
+                return;
+            }
+            if(num > 1)
             {
                 num -= 1;
                 numbertextBox.Text = num.ToString();
-                ShowImage();
             }
         }
 
         private void nextButton_Click(object sender, EventArgs e)
         {
+            if (dicom_array_3d == null)
+            {
+                return;
+            }
             if (num < imageNumber)
             {
                 num += 1;
                 numbertextBox.Text = num.ToString();
-                ShowImage();
             }
         }
 
@@ -163,16 +232,58 @@ namespace CBCTLabeler
 
         private void numbertextBox_TextChanged(object sender, EventArgs e)
         {
-            num = int.Parse(numbertextBox.Text);
-            if (num >= 0 && num < imageNumber)
+            if (dicom_array_3d == null || numbertextBox.Text == "")
             {
-                ShowImage();
+                return;
             }
+            int changed_number = int.Parse(numbertextBox.Text);
+            if (changed_number < 1)
+            {
+                numbertextBox.Text = 1.ToString();
+                return;
+            }
+            if (changed_number > imageNumber)
+            {
+                numbertextBox.Text = imageNumber.ToString();
+                return;
+            }
+            labeled = false;
+
+            num = changed_number;
+            ShowImage();
         }
 
         private void pictureBox_Click(object sender, EventArgs e)
         {
+            if (labeling)
+            {
+                Cursor = Cursors.Default;
+                int positionX = Cursor.Position.X - pictureBox.PointToScreen(new Point(0, 0)).X;
+                int positionY = Cursor.Position.Y - pictureBox.PointToScreen(new Point(0, 0)).Y;
 
+                if (positionX < 48)
+                {
+                    positionX = 48;
+                }
+                if (positionX > 511 - 48)
+                {
+                    positionX = 511 - 48;
+                }
+                if (positionY < 48)
+                {
+                    positionY = 48;
+                }
+                if (positionY > 511 - 48)
+                {
+                    positionY = 511 - 48;
+                }
+                labelPositionX = positionX;
+                labelPositionY = positionY;
+
+                ShowLabeledImage();
+                labeling = false;
+                labeled = true;
+            }
         }
     }
 }
