@@ -36,7 +36,6 @@ namespace CBCTLabeler
                 itk.simple.Image image = reader.Execute();
 
                 VectorUInt32 size = image.GetSize();
-                Console.WriteLine("Image size: " + size[0] + " " + size[1] + " " + size[2]);
 
                 int length = (int)size[0] * (int)size[1] * (int)size[2];
                 Int32[] dicom_array = new Int32[length];
@@ -87,7 +86,7 @@ namespace CBCTLabeler
             numLabel.Text = "of 0 slices";
             trackBar.Minimum = 0;
             trackBar.Maximum = 0;
-            pictureBox.Image = null;
+            pictureBox.Image = global::CBCTVLabeler.Properties.Resources.background;
             numbertextBox.Text = null;
             labeled = false;
             GC.Collect();

@@ -31,7 +31,6 @@ namespace CBCTLabeler
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            //清理内存
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }

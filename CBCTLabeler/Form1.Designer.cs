@@ -197,6 +197,7 @@ namespace CBCTLabeler
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Image = global::CBCTVLabeler.Properties.Resources.background;
             this.pictureBox.Location = new System.Drawing.Point(153, 53);
             this.pictureBox.Name = "pictureBox";
             this.tableLayoutPanel1.SetRowSpan(this.pictureBox, 2);
