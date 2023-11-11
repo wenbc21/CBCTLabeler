@@ -81,7 +81,6 @@ namespace CBCTLabeler
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(844, 697);
             this.tableLayoutPanel1.TabIndex = 0;
-            this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
             // imageLayoutPanel
             // 
@@ -304,15 +303,15 @@ namespace CBCTLabeler
         private System.Windows.Forms.Label numLabel;
         private System.Windows.Forms.ColorDialog colorDialog;
 
-        public int num = 0;
-        public int imageNumber = 0;
+        public int currectNum = 0;
+        public int totalNum = 0;
         public int [ , , ] dicom_array_3d;
-        public int window_width = 4000, window_center = 1000;
+        public double windowWidth = 4000, windowCenter = 1000;
 
         public Color labelColor = Color.Red;
         bool labeling = false;
         bool labeled = false;
-        int labelPositionX, labelPositionY;
+        int labelPositionX, labelPositionY, labelPositionZ;
     }
 }
 

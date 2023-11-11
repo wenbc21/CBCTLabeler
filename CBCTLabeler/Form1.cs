@@ -10,6 +10,8 @@ using static System.Net.Mime.MediaTypeNames;
 using System.Xml.Linq;
 using MaterialSkin;
 using MaterialSkin.Controls;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using Newtonsoft.Json.Linq;
 
 namespace CBCTLabeler
 {
@@ -25,10 +27,6 @@ namespace CBCTLabeler
             materialSkinManager.ColorScheme = new ColorScheme(Primary.BlueGrey800, Primary.BlueGrey900, Primary.BlueGrey500, Accent.LightBlue200, TextShade.WHITE);
         }
 
-        private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
         private void OpenFile_Click(object sender, EventArgs e)
         {
             if (openfolderDialog.ShowDialog() == DialogResult.OK)
@@ -40,18 +38,28 @@ namespace CBCTLabeler
                 ImageSeriesReader reader = new ImageSeriesReader();
                 VectorString dicom_names = ImageSeriesReader.GetGDCMSeriesFileNames(filePath);
                 reader.SetFileNames(dicom_names);
-                itk.simple.Image image = reader.Execute();
+                itk.simple.Image image;
+                try
+                {
+                    image = reader.Execute();
+                }
+                catch
+                {
+                    MessageBox.Show("路径下没有CBCT文件！", "注意", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
+                image = reader.Execute();
                 VectorUInt32 size = image.GetSize();
 
                 int length = (int)size[0] * (int)size[1] * (int)size[2];
                 Int32[] dicom_array = new Int32[length];
                 Marshal.Copy(image.GetBufferAsInt32(), dicom_array, 0, length);
 
-                double min_window = (double)window_center - 0.5 * (double)window_width;
+                double minWindow = windowCenter - 0.5 * windowWidth;
                 for (int i = 0; i < length; i++)
                 {
-                    double temp = (dicom_array[i] - min_window) / (double)window_width;
+                    double temp = (dicom_array[i] - minWindow) / windowWidth;
                     if (temp < 0)
                     {
                         temp = 0;
@@ -71,11 +79,11 @@ namespace CBCTLabeler
                 GC.Collect();
 
                 numLabel.Text = "of " + ((int)size[2]).ToString() + " slices";
-                num = 1;
-                imageNumber = (int)size[2];
+                currectNum = 1;
+                totalNum = (int)size[2];
                 trackBar.Minimum = 1;
-                trackBar.Maximum = imageNumber;
-                numbertextBox.Text = num.ToString();
+                trackBar.Maximum = totalNum;
+                numbertextBox.Text = currectNum.ToString();
                 labeling = false;
                 labeled = false;
 
@@ -88,8 +96,8 @@ namespace CBCTLabeler
         private void CloseFile_Click(object sender, EventArgs e)
         {
             dicom_array_3d = null;
-            num = 0;
-            imageNumber = 0;
+            currectNum = 0;
+            totalNum = 0;
             numLabel.Text = "of 0 slices";
             trackBar.Minimum = 0;
             trackBar.Maximum = 0;
@@ -101,24 +109,22 @@ namespace CBCTLabeler
 
         private void SaveFile_Click(object sender, EventArgs e)
         {
-            if (labeled && saveFileDialog.ShowDialog() == DialogResult.OK)
+            if (!labeled)
+            {
+                MessageBox.Show("还没有进行标注！", "注意", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 String filePath = saveFileDialog.FileName;
 
-                int labeledx = num - 1;
-                if (labeledx < 48)
-                {
-                    labeledx = 48;
-                }
-                if (labeledx > imageNumber - 49)
-                {
-                    labeledx = imageNumber - 49;
-                }
+                labelPositionX = currectNum - 1;
+                labelPositionX = (labelPositionX < 48) ? 48 : (labelPositionX > totalNum - 49) ? totalNum - 49 : labelPositionX;
 
                 Dictionary<string, int> dict = new Dictionary<string, int>();
-                dict.Add("midx", labeledx);
-                dict.Add("midy", labelPositionX);
-                dict.Add("midz", labelPositionY);
+                dict.Add("midx", labelPositionX);
+                dict.Add("midy", labelPositionY);
+                dict.Add("midz", labelPositionZ);
                 string jsonOutput = JsonConvert.SerializeObject(dict);
                 System.IO.File.WriteAllText(filePath, jsonOutput);
             }
@@ -131,9 +137,9 @@ namespace CBCTLabeler
             {
                 for (int y = 0; y < 512; y++)
                 {
-                    Color c = Color.FromArgb(dicom_array_3d[num - 1, x, y], 
-                        dicom_array_3d[num - 1, x, y], 
-                        dicom_array_3d[num - 1, x, y]);
+                    Color c = Color.FromArgb(dicom_array_3d[currectNum - 1, x, y], 
+                        dicom_array_3d[currectNum - 1, x, y], 
+                        dicom_array_3d[currectNum - 1, x, y]);
                     bitdata.SetPixel(y, x, c);
                 }
             }
@@ -150,16 +156,16 @@ namespace CBCTLabeler
             {
                 for (int y = 0; y < 512; y++)
                 {
-                    Color c = Color.FromArgb(dicom_array_3d[num - 1, x, y], 
-                        dicom_array_3d[num - 1, x, y], 
-                        dicom_array_3d[num - 1, x, y]);
+                    Color c = Color.FromArgb(dicom_array_3d[currectNum - 1, x, y], 
+                        dicom_array_3d[currectNum - 1, x, y], 
+                        dicom_array_3d[currectNum - 1, x, y]);
                     bitdata.SetPixel(y, x, c);
                 }
             }
 
-            for (int x = labelPositionX - 48; x < labelPositionX + 48; x++)
+            for (int x = labelPositionY - 48; x < labelPositionY + 48; x++)
             {
-                for (int y = labelPositionY - 48; y < labelPositionY + 48; y++)
+                for (int y = labelPositionZ - 48; y < labelPositionZ + 48; y++)
                 {
                     Color pixel = bitdata.GetPixel(x, y);
                     Color c = Color.FromArgb((pixel.R * 2 + labelColor.R) / 3,
@@ -206,10 +212,10 @@ namespace CBCTLabeler
             {
                 return;
             }
-            if(num > 1)
+            if(currectNum > 1)
             {
-                num -= 1;
-                numbertextBox.Text = num.ToString();
+                currectNum -= 1;
+                numbertextBox.Text = currectNum.ToString();
             }
             
         }
@@ -220,10 +226,10 @@ namespace CBCTLabeler
             {
                 return;
             }
-            if (num < imageNumber)
+            if (currectNum < totalNum)
             {
-                num += 1;
-                numbertextBox.Text = num.ToString();
+                currectNum += 1;
+                numbertextBox.Text = currectNum.ToString();
             }
             
         }
@@ -239,24 +245,24 @@ namespace CBCTLabeler
 
         private void numbertextBox_TextChanged(object sender, EventArgs e)
         {
-            if (dicom_array_3d == null || numbertextBox.Text == "")
+            if (dicom_array_3d == null || !int.TryParse(numbertextBox.Text, out currectNum))
             {
                 return;
             }
-            int changed_number = int.Parse(numbertextBox.Text);
-            if (changed_number < 1)
+            int changedNumber = int.Parse(numbertextBox.Text);
+            if (changedNumber < 1)
             {
                 numbertextBox.Text = 1.ToString();
                 return;
             }
-            if (changed_number > imageNumber)
+            if (changedNumber > totalNum)
             {
-                numbertextBox.Text = imageNumber.ToString();
+                numbertextBox.Text = totalNum.ToString();
                 return;
             }
             labeled = false;
 
-            num = changed_number;
+            currectNum = changedNumber;
             ShowImage();
         }
 
@@ -265,27 +271,11 @@ namespace CBCTLabeler
             if (labeling)
             {
                 Cursor = Cursors.Default;
-                int positionX = Cursor.Position.X - pictureBox.PointToScreen(new Point(0, 0)).X;
-                int positionY = Cursor.Position.Y - pictureBox.PointToScreen(new Point(0, 0)).Y;
-
-                if (positionX < 48)
-                {
-                    positionX = 48;
-                }
-                if (positionX > 511 - 48)
-                {
-                    positionX = 511 - 48;
-                }
-                if (positionY < 48)
-                {
-                    positionY = 48;
-                }
-                if (positionY > 511 - 48)
-                {
-                    positionY = 511 - 48;
-                }
-                labelPositionX = positionX;
-                labelPositionY = positionY;
+                int positionY = Cursor.Position.X - pictureBox.PointToScreen(new Point(0, 0)).X;
+                int positionZ = Cursor.Position.Y - pictureBox.PointToScreen(new Point(0, 0)).Y;
+                
+                labelPositionY = (positionY < 48) ? 48 : (positionY > 511 - 48) ? 511 - 48 : positionY;
+                labelPositionZ = (positionZ < 48) ? 48 : (positionZ > 511 - 48) ? 511 - 48 : positionZ;
 
                 ShowLabeledImage();
                 labeling = false;
