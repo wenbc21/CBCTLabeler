@@ -30,7 +30,6 @@ namespace CBCTLabeler
                 GC.Collect();
                 String filePath = openfolderDialog.SelectedPath;
 
-                String filePath = openfolderDialog.SelectedPath;
                 ImageSeriesReader reader = new ImageSeriesReader();
                 VectorString dicom_names = ImageSeriesReader.GetGDCMSeriesFileNames(filePath);
                 reader.SetFileNames(dicom_names);
@@ -80,7 +79,6 @@ namespace CBCTLabeler
             GC.Collect();
         }
 
-
         private void CloseFile_Click(object sender, EventArgs e)
         {
             dicom_array_3d = null;
@@ -97,7 +95,7 @@ namespace CBCTLabeler
 
         private void SaveFile_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog.ShowDialog() == DialogResult.OK && labeled)
+            if (labeled && saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 String filePath = saveFileDialog.FileName;
 
