@@ -20,7 +20,6 @@ namespace CBCTLabeler
 
         private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void OpenFile_Click(object sender, EventArgs e)
@@ -31,6 +30,7 @@ namespace CBCTLabeler
                 GC.Collect();
                 String filePath = openfolderDialog.SelectedPath;
 
+                String filePath = openfolderDialog.SelectedPath;
                 ImageSeriesReader reader = new ImageSeriesReader();
                 VectorString dicom_names = ImageSeriesReader.GetGDCMSeriesFileNames(filePath);
                 reader.SetFileNames(dicom_names);
@@ -40,7 +40,7 @@ namespace CBCTLabeler
                 Console.WriteLine("Image size: " + size[0] + " " + size[1] + " " + size[2]);
 
                 int length = (int)size[0] * (int)size[1] * (int)size[2];
-                Int32 [] dicom_array = new Int32[length];
+                Int32[] dicom_array = new Int32[length];
                 Marshal.Copy(image.GetBufferAsInt32(), dicom_array, 0, length);
 
                 double min_window = (double)window_center - 0.5 * (double)window_width;
@@ -51,10 +51,12 @@ namespace CBCTLabeler
                     {
                         temp = 0;
                     }
+
                     if (temp > 1)
                     {
                         temp = 1;
                     }
+
                     dicom_array[i] = (int)(temp * 255);
                 }
 
@@ -134,6 +136,7 @@ namespace CBCTLabeler
 
             pictureBox.Image = System.Drawing.Image.FromHbitmap(bitdata.GetHbitmap());
             pictureBox.Show();
+            
         }
 
         private void ShowLabeledImage()
@@ -168,12 +171,10 @@ namespace CBCTLabeler
 
         private void zoominButton_Click(object sender, EventArgs e)
         {
-
         }
 
         private void zoomoutButton_Click(object sender, EventArgs e)
         {
-
         }
 
         private void colorButton_Click(object sender, EventArgs e)
@@ -182,6 +183,7 @@ namespace CBCTLabeler
             {
                 labelColor = colorDialog.Color;
             }
+            
         }
 
         private void labelButton_Click(object sender, EventArgs e)
@@ -205,6 +207,7 @@ namespace CBCTLabeler
                 num -= 1;
                 numbertextBox.Text = num.ToString();
             }
+            
         }
 
         private void nextButton_Click(object sender, EventArgs e)
@@ -218,11 +221,11 @@ namespace CBCTLabeler
                 num += 1;
                 numbertextBox.Text = num.ToString();
             }
+            
         }
 
         private void serieLayoutPanel_Paint(object sender, PaintEventArgs e)
         {
-
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)
