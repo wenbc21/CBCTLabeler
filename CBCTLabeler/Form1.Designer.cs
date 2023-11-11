@@ -51,8 +51,8 @@ namespace CBCTLabeler
             this.CloseFile = new MaterialButton();
             this.SaveFile = new MaterialButton();
             this.openfolderDialog = new System.Windows.Forms.FolderBrowserDialog();
-            this.savefolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.tableLayoutPanel1.SuspendLayout();
             this.imageLayoutPanel.SuspendLayout();
             this.serieLayoutPanel.SuspendLayout();
@@ -77,7 +77,9 @@ namespace CBCTLabeler
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 256F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 256F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(844, 678);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(844, 697);
             this.tableLayoutPanel1.TabIndex = 0;
             this.tableLayoutPanel1.Paint += new System.Windows.Forms.PaintEventHandler(this.tableLayoutPanel1_Paint);
             // 
@@ -143,7 +145,7 @@ namespace CBCTLabeler
             this.serieLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.serieLayoutPanel.Location = new System.Drawing.Point(3, 309);
             this.serieLayoutPanel.Name = "serieLayoutPanel";
-            this.serieLayoutPanel.Size = new System.Drawing.Size(144, 366);
+            this.serieLayoutPanel.Size = new System.Drawing.Size(144, 385);
             this.serieLayoutPanel.TabIndex = 0;
             this.serieLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.serieLayoutPanel_Paint);
             // 
@@ -163,13 +165,10 @@ namespace CBCTLabeler
             
             
             this.trackBar.Maximum = 0;
-            
             this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(104, 10);
+            this.trackBar.Size = new System.Drawing.Size(104, 56);
             this.trackBar.TabIndex = 3;
-            
             this.trackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
-            
             // 
             // nextButton
             // 
@@ -200,13 +199,14 @@ namespace CBCTLabeler
             // 
             // pictureBox
             // 
+            this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox.Image = global::CBCTVLabeler.Properties.Resources.background;
             this.pictureBox.Location = new System.Drawing.Point(153, 53);
             this.pictureBox.Name = "pictureBox";
-            // this.pictureBox.Image = global::CBCTLabeler.Properties.Resources.background;
             this.tableLayoutPanel1.SetRowSpan(this.pictureBox, 2);
-            this.pictureBox.Size = new System.Drawing.Size(744, 622);
+            this.pictureBox.Size = new System.Drawing.Size(744, 641);
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
@@ -256,11 +256,16 @@ namespace CBCTLabeler
             this.SaveFile.UseVisualStyleBackColor = true;
             this.SaveFile.Click += new System.EventHandler(this.SaveFile_Click);
             // 
+            // saveFileDialog
+            // 
+            this.saveFileDialog.DefaultExt = "json";
+            this.saveFileDialog.Filter = "*.json|json file";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 678);
+            this.ClientSize = new System.Drawing.Size(844, 697);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "CBCTLabeler";
@@ -280,10 +285,9 @@ namespace CBCTLabeler
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private MaterialCard serieLayoutPanel;
-        private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.FlowLayoutPanel fileLayoutPanel;
         private System.Windows.Forms.FlowLayoutPanel imageLayoutPanel;
-        
+        private System.Windows.Forms.PictureBox pictureBox;
         private MaterialButton zoominButton;
         private MaterialButton zoomoutButton;
         private MaterialButton colorButton;
@@ -294,20 +298,21 @@ namespace CBCTLabeler
         private MaterialButton CloseFile;
         private MaterialButton SaveFile;
         private System.Windows.Forms.FolderBrowserDialog openfolderDialog;
-        private System.Windows.Forms.FolderBrowserDialog savefolderDialog;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.TextBox numbertextBox;
         private System.Windows.Forms.TrackBar trackBar;
         private System.Windows.Forms.Label numLabel;
+        private System.Windows.Forms.ColorDialog colorDialog;
 
         public int num = 0;
         public int imageNumber = 0;
         public int [ , , ] dicom_array_3d;
         public int window_width = 4000, window_center = 1000;
-        private System.Windows.Forms.ColorDialog colorDialog;
 
         public Color labelColor = Color.Red;
         bool labeling = false;
         bool labeled = false;
+        int labelPositionX, labelPositionY;
     }
 }
 

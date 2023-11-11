@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C418C162-FA9F-44F7-8565-4F05B5FDC079}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>CBCTViewer2</RootNamespace>
-    <AssemblyName>CBCTViewer2</AssemblyName>
+    <RootNamespace>CBCTVLabeler</RootNamespace>
+    <AssemblyName>CBCTLabeler</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,8 +53,13 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+<<<<<<< HEAD:CBCTViewer2/CBCTLabeler.csproj
     <Reference Include="MaterialSkin">
       <HintPath>MaterialSkin.dll</HintPath>
+=======
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+>>>>>>> master:CBCTLabeler/CBCTLabeler.csproj
     </Reference>
     <Reference Include="SimpleITKCSharpManaged">
       <HintPath>SimpleITKCSharpManaged.dll</HintPath>
@@ -95,6 +100,7 @@
       <DesignTime>True</DesignTime>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -112,12 +118,40 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="background.png" />
+    <Content Include="SimpleITKCSharpManaged.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SimpleITKCSharpNative.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD:CBCTViewer2/CBCTLabeler.csproj
     <Content Include="MaterialSkin.dll" />
     <Content Include="ReadMe.md" />
     <Content Include="SimpleITKCSharpManaged.dll" />
     <Content Include="SimpleITKCSharpNative.dll" />
+=======
+    <Folder Include="Resources\" />
+>>>>>>> master:CBCTLabeler/CBCTLabeler.csproj
+    <RootNamespace>CBCTVLabeler</RootNamespace>
+    <AssemblyName>CBCTLabeler</AssemblyName>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialSkin">
+      <HintPath>MaterialSkin.dll</HintPath>
+    </Reference>
+      <HintPath>SimpleITKCSharpManaged.dll</HintPath>
+    <None Include="packages.config" />
+    <Content Include="SimpleITKCSharpManaged.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SimpleITKCSharpNative.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ReadMe.md" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

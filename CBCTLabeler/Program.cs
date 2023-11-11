@@ -14,7 +14,7 @@ namespace CBCTLabeler
         {
             var timer = GetTimer(5000);
             timer.Start();
-            
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
@@ -31,7 +31,6 @@ namespace CBCTLabeler
 
         private static void OnTimedEvent(object source, ElapsedEventArgs e)
         {
-            //清理内存
             GC.Collect();
             GC.WaitForPendingFinalizers();
         }

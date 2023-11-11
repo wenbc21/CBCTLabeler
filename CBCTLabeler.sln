@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBCTLabeler", "CBCTViewer2\CBCTLabeler.csproj", "{C418C162-FA9F-44F7-8565-4F05B5FDC079}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CBCTLabeler", "CBCTLabeler\CBCTLabeler.csproj", "{C418C162-FA9F-44F7-8565-4F05B5FDC079}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
