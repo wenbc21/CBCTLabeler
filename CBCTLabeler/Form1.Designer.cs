@@ -47,40 +47,46 @@ namespace CBCTLabeler
             this.OpenFile = new System.Windows.Forms.Button();
             this.CloseFile = new System.Windows.Forms.Button();
             this.SaveFile = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.fileLabel = new System.Windows.Forms.Label();
+            this.positionLabel = new System.Windows.Forms.Label();
             this.openfolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.sizeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.imageLayoutPanel.SuspendLayout();
             this.serieLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.fileLayoutPanel.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 750F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 512F));
             this.tableLayoutPanel1.Controls.Add(this.imageLayoutPanel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.serieLayoutPanel, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.fileLayoutPanel, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 256F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 256F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(844, 697);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(818, 700);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // imageLayoutPanel
             // 
+            this.imageLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imageLayoutPanel.Controls.Add(this.zoominButton);
             this.imageLayoutPanel.Controls.Add(this.zoomoutButton);
             this.imageLayoutPanel.Controls.Add(this.colorButton);
@@ -88,14 +94,15 @@ namespace CBCTLabeler
             this.imageLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.imageLayoutPanel.Location = new System.Drawing.Point(3, 53);
             this.imageLayoutPanel.Name = "imageLayoutPanel";
-            this.imageLayoutPanel.Size = new System.Drawing.Size(144, 250);
+            this.imageLayoutPanel.Size = new System.Drawing.Size(114, 194);
             this.imageLayoutPanel.TabIndex = 0;
             // 
             // zoominButton
             // 
+            this.zoominButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.zoominButton.Location = new System.Drawing.Point(3, 3);
             this.zoominButton.Name = "zoominButton";
-            this.zoominButton.Size = new System.Drawing.Size(75, 23);
+            this.zoominButton.Size = new System.Drawing.Size(100, 30);
             this.zoominButton.TabIndex = 0;
             this.zoominButton.Text = "ZoomIn";
             this.zoominButton.UseVisualStyleBackColor = true;
@@ -103,9 +110,10 @@ namespace CBCTLabeler
             // 
             // zoomoutButton
             // 
-            this.zoomoutButton.Location = new System.Drawing.Point(3, 32);
+            this.zoomoutButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.zoomoutButton.Location = new System.Drawing.Point(3, 39);
             this.zoomoutButton.Name = "zoomoutButton";
-            this.zoomoutButton.Size = new System.Drawing.Size(75, 23);
+            this.zoomoutButton.Size = new System.Drawing.Size(100, 30);
             this.zoomoutButton.TabIndex = 1;
             this.zoomoutButton.Text = "ZoomOut";
             this.zoomoutButton.UseVisualStyleBackColor = true;
@@ -113,9 +121,10 @@ namespace CBCTLabeler
             // 
             // colorButton
             // 
-            this.colorButton.Location = new System.Drawing.Point(3, 61);
+            this.colorButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.colorButton.Location = new System.Drawing.Point(3, 75);
             this.colorButton.Name = "colorButton";
-            this.colorButton.Size = new System.Drawing.Size(75, 23);
+            this.colorButton.Size = new System.Drawing.Size(100, 30);
             this.colorButton.TabIndex = 2;
             this.colorButton.Text = "Color";
             this.colorButton.UseVisualStyleBackColor = true;
@@ -123,9 +132,10 @@ namespace CBCTLabeler
             // 
             // labelButton
             // 
-            this.labelButton.Location = new System.Drawing.Point(3, 90);
+            this.labelButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelButton.Location = new System.Drawing.Point(3, 111);
             this.labelButton.Name = "labelButton";
-            this.labelButton.Size = new System.Drawing.Size(75, 23);
+            this.labelButton.Size = new System.Drawing.Size(100, 30);
             this.labelButton.TabIndex = 3;
             this.labelButton.Text = "LABEL";
             this.labelButton.UseVisualStyleBackColor = true;
@@ -133,23 +143,25 @@ namespace CBCTLabeler
             // 
             // serieLayoutPanel
             // 
+            this.serieLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.serieLayoutPanel.Controls.Add(this.lastButton);
             this.serieLayoutPanel.Controls.Add(this.trackBar);
             this.serieLayoutPanel.Controls.Add(this.nextButton);
             this.serieLayoutPanel.Controls.Add(this.numbertextBox);
             this.serieLayoutPanel.Controls.Add(this.numLabel);
             this.serieLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.serieLayoutPanel.Location = new System.Drawing.Point(3, 309);
+            this.serieLayoutPanel.Location = new System.Drawing.Point(3, 253);
             this.serieLayoutPanel.Name = "serieLayoutPanel";
-            this.serieLayoutPanel.Size = new System.Drawing.Size(144, 385);
+            this.serieLayoutPanel.Size = new System.Drawing.Size(114, 244);
             this.serieLayoutPanel.TabIndex = 0;
             this.serieLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.serieLayoutPanel_Paint);
             // 
             // lastButton
             // 
+            this.lastButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lastButton.Location = new System.Drawing.Point(3, 3);
             this.lastButton.Name = "lastButton";
-            this.lastButton.Size = new System.Drawing.Size(75, 23);
+            this.lastButton.Size = new System.Drawing.Size(100, 30);
             this.lastButton.TabIndex = 0;
             this.lastButton.Text = "Last";
             this.lastButton.UseVisualStyleBackColor = true;
@@ -157,18 +169,19 @@ namespace CBCTLabeler
             // 
             // trackBar
             // 
-            this.trackBar.Location = new System.Drawing.Point(3, 32);
+            this.trackBar.Location = new System.Drawing.Point(3, 39);
             this.trackBar.Maximum = 0;
             this.trackBar.Name = "trackBar";
-            this.trackBar.Size = new System.Drawing.Size(104, 56);
+            this.trackBar.Size = new System.Drawing.Size(100, 56);
             this.trackBar.TabIndex = 3;
             this.trackBar.Scroll += new System.EventHandler(this.trackBar1_Scroll);
             // 
             // nextButton
             // 
-            this.nextButton.Location = new System.Drawing.Point(3, 94);
+            this.nextButton.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextButton.Location = new System.Drawing.Point(3, 101);
             this.nextButton.Name = "nextButton";
-            this.nextButton.Size = new System.Drawing.Size(75, 23);
+            this.nextButton.Size = new System.Drawing.Size(100, 30);
             this.nextButton.TabIndex = 1;
             this.nextButton.Text = "Next";
             this.nextButton.UseVisualStyleBackColor = true;
@@ -176,18 +189,20 @@ namespace CBCTLabeler
             // 
             // numbertextBox
             // 
-            this.numbertextBox.Location = new System.Drawing.Point(3, 123);
+            this.numbertextBox.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numbertextBox.Location = new System.Drawing.Point(3, 137);
             this.numbertextBox.Name = "numbertextBox";
-            this.numbertextBox.Size = new System.Drawing.Size(75, 25);
+            this.numbertextBox.Size = new System.Drawing.Size(100, 25);
             this.numbertextBox.TabIndex = 2;
             this.numbertextBox.TextChanged += new System.EventHandler(this.numbertextBox_TextChanged);
             // 
             // numLabel
             // 
             this.numLabel.AutoSize = true;
-            this.numLabel.Location = new System.Drawing.Point(3, 151);
+            this.numLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numLabel.Location = new System.Drawing.Point(3, 165);
             this.numLabel.Name = "numLabel";
-            this.numLabel.Size = new System.Drawing.Size(95, 15);
+            this.numLabel.Size = new System.Drawing.Size(81, 20);
             this.numLabel.TabIndex = 4;
             this.numLabel.Text = "of 0 slices";
             // 
@@ -197,10 +212,10 @@ namespace CBCTLabeler
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox.Image = global::CBCTVLabeler.Properties.Resources.background;
-            this.pictureBox.Location = new System.Drawing.Point(153, 53);
+            this.pictureBox.Location = new System.Drawing.Point(123, 53);
             this.pictureBox.Name = "pictureBox";
-            this.tableLayoutPanel1.SetRowSpan(this.pictureBox, 2);
-            this.pictureBox.Size = new System.Drawing.Size(744, 641);
+            this.tableLayoutPanel1.SetRowSpan(this.pictureBox, 3);
+            this.pictureBox.Size = new System.Drawing.Size(692, 644);
             this.pictureBox.TabIndex = 1;
             this.pictureBox.TabStop = false;
             this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
@@ -214,15 +229,16 @@ namespace CBCTLabeler
             this.fileLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileLayoutPanel.Location = new System.Drawing.Point(3, 3);
             this.fileLayoutPanel.Name = "fileLayoutPanel";
-            this.fileLayoutPanel.Size = new System.Drawing.Size(894, 44);
+            this.fileLayoutPanel.Size = new System.Drawing.Size(812, 44);
             this.fileLayoutPanel.TabIndex = 2;
             // 
             // OpenFile
             // 
             this.OpenFile.AutoSize = true;
+            this.OpenFile.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.OpenFile.Location = new System.Drawing.Point(3, 3);
             this.OpenFile.Name = "OpenFile";
-            this.OpenFile.Size = new System.Drawing.Size(81, 25);
+            this.OpenFile.Size = new System.Drawing.Size(100, 30);
             this.OpenFile.TabIndex = 0;
             this.OpenFile.Text = "OpenFile";
             this.OpenFile.UseVisualStyleBackColor = true;
@@ -231,9 +247,10 @@ namespace CBCTLabeler
             // CloseFile
             // 
             this.CloseFile.AutoSize = true;
-            this.CloseFile.Location = new System.Drawing.Point(90, 3);
+            this.CloseFile.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseFile.Location = new System.Drawing.Point(109, 3);
             this.CloseFile.Name = "CloseFile";
-            this.CloseFile.Size = new System.Drawing.Size(89, 25);
+            this.CloseFile.Size = new System.Drawing.Size(100, 30);
             this.CloseFile.TabIndex = 1;
             this.CloseFile.Text = "CloseFile";
             this.CloseFile.UseVisualStyleBackColor = true;
@@ -242,24 +259,67 @@ namespace CBCTLabeler
             // SaveFile
             // 
             this.SaveFile.AutoSize = true;
-            this.SaveFile.Location = new System.Drawing.Point(185, 3);
+            this.SaveFile.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SaveFile.Location = new System.Drawing.Point(215, 3);
             this.SaveFile.Name = "SaveFile";
-            this.SaveFile.Size = new System.Drawing.Size(81, 25);
+            this.SaveFile.Size = new System.Drawing.Size(100, 30);
             this.SaveFile.TabIndex = 2;
             this.SaveFile.Text = "SaveFile";
             this.SaveFile.UseVisualStyleBackColor = true;
             this.SaveFile.Click += new System.EventHandler(this.SaveFile_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel1.Controls.Add(this.fileLabel);
+            this.flowLayoutPanel1.Controls.Add(this.sizeLabel);
+            this.flowLayoutPanel1.Controls.Add(this.positionLabel);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 503);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(114, 194);
+            this.flowLayoutPanel1.TabIndex = 3;
+            // 
+            // fileLabel
+            // 
+            this.fileLabel.AutoSize = true;
+            this.fileLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileLabel.Location = new System.Drawing.Point(3, 0);
+            this.fileLabel.Name = "fileLabel";
+            this.fileLabel.Size = new System.Drawing.Size(89, 20);
+            this.fileLabel.TabIndex = 0;
+            this.fileLabel.Text = "File:          ";
+            // 
+            // positionLabel
+            // 
+            this.positionLabel.AutoSize = true;
+            this.positionLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.positionLabel.Location = new System.Drawing.Point(3, 40);
+            this.positionLabel.Name = "positionLabel";
+            this.positionLabel.Size = new System.Drawing.Size(76, 20);
+            this.positionLabel.TabIndex = 1;
+            this.positionLabel.Text = "Position: ";
             // 
             // saveFileDialog
             // 
             this.saveFileDialog.DefaultExt = "json";
             this.saveFileDialog.Filter = "*.json|json file";
             // 
+            // sizeLabel
+            // 
+            this.sizeLabel.AutoSize = true;
+            this.sizeLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sizeLabel.Location = new System.Drawing.Point(3, 20);
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Size = new System.Drawing.Size(103, 20);
+            this.sizeLabel.TabIndex = 2;
+            this.sizeLabel.Text = "Size:            ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 697);
+            this.ClientSize = new System.Drawing.Size(818, 700);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Form1";
             this.Text = "CBCTLabeler";
@@ -271,6 +331,8 @@ namespace CBCTLabeler
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.fileLayoutPanel.ResumeLayout(false);
             this.fileLayoutPanel.PerformLayout();
+            this.flowLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -307,6 +369,10 @@ namespace CBCTLabeler
         bool labeling = false;
         bool labeled = false;
         int labelPositionX, labelPositionY, labelPositionZ;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Label fileLabel;
+        private System.Windows.Forms.Label positionLabel;
+        private System.Windows.Forms.Label sizeLabel;
     }
 }
 
