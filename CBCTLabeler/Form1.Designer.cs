@@ -48,7 +48,7 @@ namespace CBCTLabeler
             this.CloseFile = new System.Windows.Forms.Button();
             this.SaveFile = new System.Windows.Forms.Button();
             this.fileLabel = new System.Windows.Forms.Label();
-            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel = new System.Windows.Forms.FlowLayoutPanel();
             this.sizeLabel = new System.Windows.Forms.Label();
             this.positionLabel = new System.Windows.Forms.Label();
             this.cursorLabel = new System.Windows.Forms.Label();
@@ -61,7 +61,7 @@ namespace CBCTLabeler
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.fileLayoutPanel.SuspendLayout();
-            this.flowLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -73,7 +73,7 @@ namespace CBCTLabeler
             this.tableLayoutPanel1.Controls.Add(this.serieLayoutPanel, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.fileLayoutPanel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -284,18 +284,18 @@ namespace CBCTLabeler
             this.fileLabel.Text = "File Path:       ";
             this.fileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // flowLayoutPanel2
+            // flowLayoutPanel
             // 
-            this.flowLayoutPanel2.AutoSize = true;
-            this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel2.Controls.Add(this.sizeLabel);
-            this.flowLayoutPanel2.Controls.Add(this.positionLabel);
-            this.flowLayoutPanel2.Controls.Add(this.cursorLabel);
-            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 503);
-            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(114, 194);
-            this.flowLayoutPanel2.TabIndex = 4;
+            this.flowLayoutPanel.AutoSize = true;
+            this.flowLayoutPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel.Controls.Add(this.sizeLabel);
+            this.flowLayoutPanel.Controls.Add(this.positionLabel);
+            this.flowLayoutPanel.Controls.Add(this.cursorLabel);
+            this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel.Location = new System.Drawing.Point(3, 503);
+            this.flowLayoutPanel.Name = "flowLayoutPanel";
+            this.flowLayoutPanel.Size = new System.Drawing.Size(114, 194);
+            this.flowLayoutPanel.TabIndex = 4;
             // 
             // sizeLabel
             // 
@@ -346,7 +346,7 @@ namespace CBCTLabeler
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.fileLayoutPanel.ResumeLayout(false);
             this.fileLayoutPanel.PerformLayout();
-            this.flowLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -357,6 +357,7 @@ namespace CBCTLabeler
         private System.Windows.Forms.FlowLayoutPanel serieLayoutPanel;
         private System.Windows.Forms.FlowLayoutPanel fileLayoutPanel;
         private System.Windows.Forms.FlowLayoutPanel imageLayoutPanel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.Button zoominButton;
         private System.Windows.Forms.Button zoomoutButton;
@@ -373,6 +374,10 @@ namespace CBCTLabeler
         private System.Windows.Forms.TrackBar trackBar;
         private System.Windows.Forms.Label numLabel;
         private System.Windows.Forms.ColorDialog colorDialog;
+        private System.Windows.Forms.Label fileLabel;
+        private System.Windows.Forms.Label positionLabel;
+        private System.Windows.Forms.Label sizeLabel;
+        private System.Windows.Forms.Label cursorLabel;
 
         public int currectNum = 0;
         public int totalNum = 0;
@@ -383,11 +388,6 @@ namespace CBCTLabeler
         bool labeling = false;
         bool labeled = false;
         int labelPositionX, labelPositionY, labelPositionZ;
-        private System.Windows.Forms.Label fileLabel;
-        private System.Windows.Forms.Label positionLabel;
-        private System.Windows.Forms.Label sizeLabel;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
-        private System.Windows.Forms.Label cursorLabel;
     }
 }
 

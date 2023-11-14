@@ -53,16 +53,7 @@ namespace CBCTLabeler
                 for (int i = 0; i < length; i++)
                 {
                     double temp = (dicom_array[i] - minWindow) / windowWidth;
-                    if (temp < 0)
-                    {
-                        temp = 0;
-                    }
-
-                    if (temp > 1)
-                    {
-                        temp = 1;
-                    }
-
+                    temp = (temp < 0) ? 0 : (temp > 1) ? 1 : temp;
                     dicom_array[i] = (int)(temp * 255);
                 }
 
@@ -84,7 +75,6 @@ namespace CBCTLabeler
                 positionLabel.Text = "Label Position:";
 
                 ShowImage();
-
             }
             GC.Collect();
         }
