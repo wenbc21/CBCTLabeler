@@ -47,32 +47,33 @@ namespace CBCTLabeler
             this.OpenFile = new System.Windows.Forms.Button();
             this.CloseFile = new System.Windows.Forms.Button();
             this.SaveFile = new System.Windows.Forms.Button();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.fileLabel = new System.Windows.Forms.Label();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.sizeLabel = new System.Windows.Forms.Label();
             this.positionLabel = new System.Windows.Forms.Label();
+            this.cursorLabel = new System.Windows.Forms.Label();
             this.openfolderDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.sizeLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.imageLayoutPanel.SuspendLayout();
             this.serieLayoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             this.fileLayoutPanel.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 512F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 698F));
             this.tableLayoutPanel1.Controls.Add(this.imageLayoutPanel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.serieLayoutPanel, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.pictureBox, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.fileLayoutPanel, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -81,6 +82,8 @@ namespace CBCTLabeler
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 250F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(818, 700);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -198,13 +201,14 @@ namespace CBCTLabeler
             // 
             // numLabel
             // 
-            this.numLabel.AutoSize = true;
+            this.numLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.numLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numLabel.Location = new System.Drawing.Point(3, 165);
             this.numLabel.Name = "numLabel";
-            this.numLabel.Size = new System.Drawing.Size(81, 20);
+            this.numLabel.Size = new System.Drawing.Size(100, 30);
             this.numLabel.TabIndex = 4;
             this.numLabel.Text = "of 0 slices";
+            this.numLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // pictureBox
             // 
@@ -226,6 +230,7 @@ namespace CBCTLabeler
             this.fileLayoutPanel.Controls.Add(this.OpenFile);
             this.fileLayoutPanel.Controls.Add(this.CloseFile);
             this.fileLayoutPanel.Controls.Add(this.SaveFile);
+            this.fileLayoutPanel.Controls.Add(this.fileLabel);
             this.fileLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.fileLayoutPanel.Location = new System.Drawing.Point(3, 3);
             this.fileLayoutPanel.Name = "fileLayoutPanel";
@@ -268,52 +273,61 @@ namespace CBCTLabeler
             this.SaveFile.UseVisualStyleBackColor = true;
             this.SaveFile.Click += new System.EventHandler(this.SaveFile_Click);
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.flowLayoutPanel1.Controls.Add(this.fileLabel);
-            this.flowLayoutPanel1.Controls.Add(this.sizeLabel);
-            this.flowLayoutPanel1.Controls.Add(this.positionLabel);
-            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 503);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(114, 194);
-            this.flowLayoutPanel1.TabIndex = 3;
-            // 
             // fileLabel
             // 
-            this.fileLabel.AutoSize = true;
             this.fileLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.fileLabel.Location = new System.Drawing.Point(3, 0);
+            this.fileLabel.Location = new System.Drawing.Point(321, 3);
+            this.fileLabel.Margin = new System.Windows.Forms.Padding(3);
             this.fileLabel.Name = "fileLabel";
-            this.fileLabel.Size = new System.Drawing.Size(89, 20);
+            this.fileLabel.Size = new System.Drawing.Size(400, 30);
             this.fileLabel.TabIndex = 0;
-            this.fileLabel.Text = "File:          ";
+            this.fileLabel.Text = "File Path:       ";
+            this.fileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.AutoSize = true;
+            this.flowLayoutPanel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.flowLayoutPanel2.Controls.Add(this.sizeLabel);
+            this.flowLayoutPanel2.Controls.Add(this.positionLabel);
+            this.flowLayoutPanel2.Controls.Add(this.cursorLabel);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 503);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(114, 194);
+            this.flowLayoutPanel2.TabIndex = 4;
+            // 
+            // sizeLabel
+            // 
+            this.sizeLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.sizeLabel.Location = new System.Drawing.Point(3, 0);
+            this.sizeLabel.Name = "sizeLabel";
+            this.sizeLabel.Size = new System.Drawing.Size(110, 50);
+            this.sizeLabel.TabIndex = 2;
+            this.sizeLabel.Text = "Size:       ";
             // 
             // positionLabel
             // 
-            this.positionLabel.AutoSize = true;
-            this.positionLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.positionLabel.Location = new System.Drawing.Point(3, 40);
+            this.positionLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.positionLabel.Location = new System.Drawing.Point(3, 50);
             this.positionLabel.Name = "positionLabel";
-            this.positionLabel.Size = new System.Drawing.Size(76, 20);
+            this.positionLabel.Size = new System.Drawing.Size(110, 50);
             this.positionLabel.TabIndex = 1;
-            this.positionLabel.Text = "Position: ";
+            this.positionLabel.Text = "Label Position: ";
+            // 
+            // cursorLabel
+            // 
+            this.cursorLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cursorLabel.Location = new System.Drawing.Point(3, 100);
+            this.cursorLabel.Name = "cursorLabel";
+            this.cursorLabel.Size = new System.Drawing.Size(120, 50);
+            this.cursorLabel.TabIndex = 3;
+            this.cursorLabel.Text = "Cursor Position:";
             // 
             // saveFileDialog
             // 
             this.saveFileDialog.DefaultExt = "json";
             this.saveFileDialog.Filter = "*.json|json file";
-            // 
-            // sizeLabel
-            // 
-            this.sizeLabel.AutoSize = true;
-            this.sizeLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sizeLabel.Location = new System.Drawing.Point(3, 20);
-            this.sizeLabel.Name = "sizeLabel";
-            this.sizeLabel.Size = new System.Drawing.Size(103, 20);
-            this.sizeLabel.TabIndex = 2;
-            this.sizeLabel.Text = "Size:            ";
             // 
             // Form1
             // 
@@ -324,6 +338,7 @@ namespace CBCTLabeler
             this.Name = "Form1";
             this.Text = "CBCTLabeler";
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.imageLayoutPanel.ResumeLayout(false);
             this.serieLayoutPanel.ResumeLayout(false);
             this.serieLayoutPanel.PerformLayout();
@@ -331,8 +346,7 @@ namespace CBCTLabeler
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.fileLayoutPanel.ResumeLayout(false);
             this.fileLayoutPanel.PerformLayout();
-            this.flowLayoutPanel1.ResumeLayout(false);
-            this.flowLayoutPanel1.PerformLayout();
+            this.flowLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -369,10 +383,11 @@ namespace CBCTLabeler
         bool labeling = false;
         bool labeled = false;
         int labelPositionX, labelPositionY, labelPositionZ;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Label fileLabel;
         private System.Windows.Forms.Label positionLabel;
         private System.Windows.Forms.Label sizeLabel;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Label cursorLabel;
     }
 }
 

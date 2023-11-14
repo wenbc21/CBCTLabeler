@@ -71,14 +71,17 @@ namespace CBCTLabeler
                 dicom_array = null;
                 GC.Collect();
 
-                numLabel.Text = "of " + ((int)size[2]).ToString() + " slices";
-                currectNum = 1;
                 totalNum = (int)size[2];
+                numLabel.Text = "of " + totalNum.ToString() + " slices";
+                currectNum = 1;
                 trackBar.Minimum = 1;
                 trackBar.Maximum = totalNum;
                 numbertextBox.Text = currectNum.ToString();
                 labeling = false;
                 labeled = false;
+                fileLabel.Text = "File Path: " + filePath;
+                sizeLabel.Text = "Size: \n" + totalNum.ToString() + ", 512, 512";
+                positionLabel.Text = "Label Position:";
 
                 ShowImage();
 
@@ -97,6 +100,9 @@ namespace CBCTLabeler
             pictureBox.Image = global::CBCTVLabeler.Properties.Resources.background;
             numbertextBox.Text = null;
             labeled = false;
+            fileLabel.Text = "File Path:";
+            sizeLabel.Text = "Size:";
+            positionLabel.Text = "Label Position:";
             GC.Collect();
         }
 
@@ -110,9 +116,6 @@ namespace CBCTLabeler
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
             {
                 String filePath = saveFileDialog.FileName;
-
-                labelPositionX = currectNum - 1;
-                labelPositionX = (labelPositionX < 48) ? 48 : (labelPositionX > totalNum - 49) ? totalNum - 49 : labelPositionX;
 
                 Dictionary<string, int> dict = new Dictionary<string, int>();
                 dict.Add("midx", labelPositionX);
@@ -266,13 +269,17 @@ namespace CBCTLabeler
                 Cursor = Cursors.Default;
                 int positionY = Cursor.Position.X - pictureBox.PointToScreen(new Point(0, 0)).X;
                 int positionZ = Cursor.Position.Y - pictureBox.PointToScreen(new Point(0, 0)).Y;
-                
+
+                labelPositionX = currectNum - 1;
+                labelPositionX = (labelPositionX < 48) ? 48 : (labelPositionX > totalNum - 49) ? totalNum - 49 : labelPositionX;
                 labelPositionY = (positionY < 48) ? 48 : (positionY > 511 - 48) ? 511 - 48 : positionY;
                 labelPositionZ = (positionZ < 48) ? 48 : (positionZ > 511 - 48) ? 511 - 48 : positionZ;
 
                 ShowLabeledImage();
                 labeling = false;
                 labeled = true;
+                positionLabel.Text = "Label Position: \n" + labelPositionX.ToString() + ", " +
+                    labelPositionY.ToString() + ", " +  labelPositionZ.ToString();
             }
         }
     }
