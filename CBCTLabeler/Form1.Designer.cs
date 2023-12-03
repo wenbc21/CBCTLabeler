@@ -202,7 +202,7 @@ namespace CBCTLabeler
             // numLabel
             // 
             this.numLabel.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.numLabel.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.numLabel.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numLabel.Location = new System.Drawing.Point(3, 165);
             this.numLabel.Name = "numLabel";
             this.numLabel.Size = new System.Drawing.Size(100, 30);
