@@ -1,4 +1,4 @@
-﻿using itk.simple;
+using itk.simple;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -121,19 +121,16 @@ namespace CBCTLabeler
                     {
                         for(int k = 0; k < 96; k++)
                         {
-                            dicom_labeled[i*96*96 + j*96 + k] = dicom_array_3d[
+                            dicom_labeled[i * 96 * 96 + j * 96 + k] = (Int32)dicom_array_3d[
                                 labelPositionX - 48 + i,
-                                labelPositionY - 48 + j,
-                                labelPositionZ - 48 + k];
+                                labelPositionZ - 48 + j,
+                                labelPositionY - 48 + k];
                         }
                     }
                 }
-
                 itk.simple.Image outImage = new itk.simple.Image(96, 96, 96, itk.simple.PixelIDValueEnum.sitkInt32);
                 IntPtr outImageBuffer = outImage.GetBufferAsInt32();
-                Marshal.Copy(dicom_labeled, 0, outImageBuffer, 96*96*96);
-                outImage = SimpleITK.RescaleIntensity(outImage, 0, 255);
-                outImage = SimpleITK.Cast(outImage, itk.simple.PixelIDValueEnum.sitkInt32);
+                Marshal.Copy(dicom_labeled, 0, outImageBuffer, 96 * 96 * 96);
                 SimpleITK.WriteImage(outImage, filePath + ".nii.gz");
 
                 MessageBox.Show("保存成功！", "注意", MessageBoxButtons.OK);
