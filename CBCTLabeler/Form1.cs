@@ -112,7 +112,31 @@ namespace CBCTLabeler
                 dict.Add("midy", labelPositionY);
                 dict.Add("midz", labelPositionZ);
                 string jsonOutput = JsonConvert.SerializeObject(dict);
-                System.IO.File.WriteAllText(filePath, jsonOutput);
+                System.IO.File.WriteAllText(filePath + ".json", jsonOutput);
+
+                Int32[] dicom_labeled = new Int32[96*96*96];
+                for(int i = 0; i < 96; i++)
+                {
+                    for(int j = 0; j < 96; j++)
+                    {
+                        for(int k = 0; k < 96; k++)
+                        {
+                            dicom_labeled[i*96*96 + j*96 + k] = dicom_array_3d[
+                                labelPositionX - 48 + i,
+                                labelPositionY - 48 + j,
+                                labelPositionZ - 48 + k];
+                        }
+                    }
+                }
+
+                itk.simple.Image outImage = new itk.simple.Image(96, 96, 96, itk.simple.PixelIDValueEnum.sitkInt32);
+                IntPtr outImageBuffer = outImage.GetBufferAsInt32();
+                Marshal.Copy(dicom_labeled, 0, outImageBuffer, 96*96*96);
+                outImage = SimpleITK.RescaleIntensity(outImage, 0, 255);
+                outImage = SimpleITK.Cast(outImage, itk.simple.PixelIDValueEnum.sitkInt32);
+                SimpleITK.WriteImage(outImage, filePath + ".nii.gz");
+
+                MessageBox.Show("保存成功！", "注意", MessageBoxButtons.OK);
             }
         }
 
@@ -179,7 +203,6 @@ namespace CBCTLabeler
             {
                 labelColor = colorDialog.Color;
             }
-            
         }
 
         private void labelButton_Click(object sender, EventArgs e)
@@ -217,11 +240,6 @@ namespace CBCTLabeler
                 currectNum += 1;
                 numbertextBox.Text = currectNum.ToString();
             }
-            
-        }
-
-        private void serieLayoutPanel_Paint(object sender, PaintEventArgs e)
-        {
         }
 
         private void trackBar1_Scroll(object sender, EventArgs e)

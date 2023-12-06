@@ -157,7 +157,6 @@ namespace CBCTLabeler
             this.serieLayoutPanel.Name = "serieLayoutPanel";
             this.serieLayoutPanel.Size = new System.Drawing.Size(114, 244);
             this.serieLayoutPanel.TabIndex = 0;
-            this.serieLayoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.serieLayoutPanel_Paint);
             // 
             // lastButton
             // 
@@ -323,11 +322,6 @@ namespace CBCTLabeler
             this.cursorLabel.Size = new System.Drawing.Size(120, 50);
             this.cursorLabel.TabIndex = 3;
             this.cursorLabel.Text = "Cursor Position:";
-            // 
-            // saveFileDialog
-            // 
-            this.saveFileDialog.DefaultExt = "json";
-            this.saveFileDialog.Filter = "*.json|json file";
             // 
             // Form1
             // 
